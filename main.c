@@ -1,27 +1,25 @@
 #include "FreeRTOS.h"
 #include "task.h"
+#include "tasks/tasks.h"
 #include <stdio.h>
 #include "pico/stdlib.h"
-
 #include "hardware/i2c.h"
+#include "ssd1306.h"
+#include <string.h>
+#include <stdlib.h>
+#include "hardware/hardware_init.h"
 
-void led_task() {
-  const uint LED_PIN = 11;
-  gpio_init(LED_PIN);
-  gpio_set_dir(LED_PIN, GPIO_OUT);
-  while (true) {
-    gpio_put(LED_PIN, 1);
-    vTaskDelay(100);
-    gpio_put(LED_PIN, 0);
-    vTaskDelay(100);
-  }
-}
+extern TaskHandle_t handle_button_monitor; 
+extern TaskHandle_t handle_wait_reaction;
 
 int main() {
-  stdio_init_all();
+    hardware_init(); // Inicialização movida para hardware_init.c
 
-  xTaskCreate(led_task, "LED_Task", 256, NULL, 1, NULL);
-  vTaskStartScheduler();
+    xTaskCreate(TaskWaitForReaction, "Reacao", 1024, NULL, 2, &handle_wait_reaction);
+    xTaskCreate(TaskButtonMonitor, "Botoes", 512, NULL, 1, &handle_button_monitor);
+    xTaskCreate(TaskDisplay, "Display", 1024, NULL, 3, NULL);
 
-  while(1){};
+    vTaskStartScheduler();
+
+    while (1) {}
 }

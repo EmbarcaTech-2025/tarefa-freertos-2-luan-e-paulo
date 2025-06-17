@@ -20,7 +20,7 @@ cmake_minimum_required(VERSION 3.12)
 if (DEFINED ENV{FREERTOS_PATH})
   SET(FREERTOS_PATH $ENV{FREERTOS_PATH})
 else()
-  SET(FREERTOS_PATH ${CMAKE_CURRENT_LIST_DIR}/FreeRTOS-Kernel)
+  SET(FREERTOS_PATH ${CMAKE_CURRENT_LIST_DIR}/FreeRTOS)
 endif()
 
 message("FreeRTOS Kernel located in ${FREERTOS_PATH}")
@@ -37,6 +37,9 @@ pico_sdk_init()
 
 add_executable(embarcatech-tarefa-freertos-2
     main.c
+    include/ssd1306_i2c.c
+    hardware/hardware_init.c
+    tasks/tasks.c
 )
 
 target_include_directories(embarcatech-tarefa-freertos-2 PRIVATE
@@ -55,3 +58,4 @@ pico_add_extra_outputs(embarcatech-tarefa-freertos-2)
 # if you have anything in "lib" folder then uncomment below - remember to add a CMakeLists.txt
 # file to the "lib" directory
 #add_subdirectory(lib)
+
