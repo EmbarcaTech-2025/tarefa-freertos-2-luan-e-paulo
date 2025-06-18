@@ -13,7 +13,7 @@ extern TaskHandle_t handle_button_monitor;
 extern TaskHandle_t handle_wait_reaction;
 
 int main() {
-    hardware_init(); // Inicialização movida para hardware_init.c
+    hardware_init();
 
     xTaskCreate(TaskWaitForReaction, "Reacao", 1024, NULL, 2, &handle_wait_reaction);
     xTaskCreate(TaskButtonMonitor, "Botoes", 512, NULL, 1, &handle_button_monitor);

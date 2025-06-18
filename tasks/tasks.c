@@ -27,7 +27,7 @@ void TaskWaitForReaction(void *params) {
         ssd1306_draw_string(ssd, 30, 32, "Aguarde");
         render_on_display(ssd, &frame_area);
 
-        // Espera aleatória entre 2 e 9 segundos (com possibilidade de interrupção)
+        // Espera aleatória entre 1 e 3 segundos (com possibilidade de interrupção)
         int wait_time = 1000 + (rand() % 2000);
         int waited = 0;
         while (waited < wait_time && !restart_attempt) {
@@ -76,7 +76,6 @@ void TaskWaitForReaction(void *params) {
             continue;
         }
 
-        // Aguarda 2 segundos para o usuário ver o tempo, ignorando toques
         vTaskDelay(pdMS_TO_TICKS(2000));
 
     }
@@ -104,7 +103,7 @@ void TaskButtonMonitor(void *params) {
         if (expected_button == 0) {
             absolute_time_t press_time = get_absolute_time();
             int64_t diff_us = absolute_time_diff_us(start_time, press_time);
-            reaction_time_ms = (diff_us + 500) / 1000;  // Arredondamento correto
+            reaction_time_ms = (diff_us + 500) / 1000; 
             waiting_for_press = false;
         } else {
             early_or_wrong_press = true;
@@ -116,7 +115,7 @@ void TaskButtonMonitor(void *params) {
         if (expected_button == 1) {
             absolute_time_t press_time = get_absolute_time();
             int64_t diff_us = absolute_time_diff_us(start_time, press_time);
-            reaction_time_ms = (diff_us + 500) / 1000;  // Arredondamento correto
+            reaction_time_ms = (diff_us + 500) / 1000;
             waiting_for_press = false;
         } else {
             early_or_wrong_press = true;
