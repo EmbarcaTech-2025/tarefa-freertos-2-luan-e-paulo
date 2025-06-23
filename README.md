@@ -1,7 +1,7 @@
 
 # Tarefa: Roteiro de FreeRTOS #2 - EmbarcaTech 2025
 
-Autores: **Luan Felipe Azzi e Paulo**
+Autores: **Luan Felipe Azzi e Paulo Santos do Nascimento Filho**
 
 Curso: Residência Tecnológica em Sistemas Embarcados
 
@@ -25,6 +25,14 @@ Este projeto implementa um jogo de tempo de reação usando o microcontrolador *
    - Verde: pronto/aguardando
    - Azul/Vermelho: indica qual botão pressionar (azul para A, vermelho para B)
    - Amarelo: erro/pressão antecipada
+  
+## Video demonstração
+
+
+
+https://github.com/user-attachments/assets/137aff45-0f0c-46da-9ef1-01fabb941c9c
+
+
 
 ## Componentes Usados
 
